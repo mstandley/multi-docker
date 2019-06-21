@@ -20,4 +20,16 @@ after_success:
   - docker push mstandley/multi-server
   - docker push mstandley/multi-worker
   
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-1"
+  app: "marks-multi-docker"
+  env: "MarksMultiDocker-env-1"
+  bucket_name: "elasticbeanstalk-eu-west-1-146510325632"
+  bucket_path: "mark-docker-multi"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
 
