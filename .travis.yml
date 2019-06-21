@@ -3,13 +3,13 @@ services:
   - docker
 
 before_install:
-  - docker build -t mstandley/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t mstandley/react-test -f ./frontend/Dockerfile.dev ./frontend
 
 script:
   - docker run -e CI=true mstandley/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t mstandley/multi-client ./client
+  - docker build -t mstandley/multi-client ./frontend
   - docker build -t mstandley/multi-nginx ./nginx
   - docker build -t mstandley/multi-server ./server
   - docker build -t mstandley/multi-worker ./worker
